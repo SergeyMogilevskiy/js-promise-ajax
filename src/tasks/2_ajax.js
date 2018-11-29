@@ -72,10 +72,9 @@ async function showProducts() {
   let page = 1;
   while (question) {
     await getProductsList(page);
-    page++
+    page++;
     question = confirm("Show more ?");
   }
-  
 }
 
 showProducts();

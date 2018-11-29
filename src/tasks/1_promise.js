@@ -6,7 +6,7 @@
 function randomNumberHandler() {
   let randomNumber = Math.floor(Math.random()*10 + 1)
 
-  let promise =  new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     setTimeout(() => {
       if (randomNumber > 5) {
         reject(randomNumber);
@@ -15,12 +15,12 @@ function randomNumberHandler() {
       resolve(randomNumber);
     }, randomNumber*1000);
   });
-  promise
-  .then(number => console.log(`Number is: ${number}`))
-  .catch(number => console.log(`Error: ${number}`))
+  
 }
 
 randomNumberHandler()
+.then(number => console.log(`Number is: ${number}`))
+.catch(number => console.log(`Error: ${number}`))
 // task 2
 //Напишите функцию delay, которая принимает задержку и функцию и выполняет ее после заданной задержки
 function delay (ms, callback) {

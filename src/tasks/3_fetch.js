@@ -1,21 +1,27 @@
-const URL = "https://my-json-server.typicode.com/tkachenko-tatiana/shop-api";
 
 
 class Fetch {
-  constructor(url) {
-    this.url = url
-  }
+  
+  static get(url, option) {
 
-  get(url) {
-    fetch(`${url}/products`)
-      .then(response => {
-        response.json().then(products => {
-          console.log(products);
-        });
-      })
-      .catch(err => console.log(err));
   }
+  static post(url, option) {}
+  static put(url, option) {}
+  static delete(url, option) {}
+  
+  fetch(url, option) {
+    fetch(`${url}/products`)
+    .then(response => {
+      response.json().then(products => {
+        console.log(products);
+      });
+    })
+    .catch(err => console.log(err));
+  }  
 }
 
-let shopApi = new Fetch(URL)
+const URL = "https://my-json-server.typicode.com/tkachenko-tatiana/shop-api";
+
+
+shopApi.get(URL)
 
