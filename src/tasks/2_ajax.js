@@ -49,7 +49,7 @@ updateProduct();
 // task 5 +/-
 function deleteProduct(id) {
   fetch(`${URL}/products/${id}`, {
-    method: "delete"
+    method: "DELETE"
   }).catch(err => console.log(err));
 }
 
