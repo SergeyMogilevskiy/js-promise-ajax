@@ -106,8 +106,13 @@ const delay3 = () => {
   });
 };
 
-function sum (term1, term2, term3) {
-  
+async function sum (term1, term2, term3) {
+  let sum = 0;
+  await term1().then((res) => sum += res)
+  await term2().then((res) => sum += res)
+  await term3().then((res) => sum += res)
+  console.log(sum)
+
 }
 
-sum(delay1, delay2, delay3).then()
+sum(delay1, delay2, delay3)
