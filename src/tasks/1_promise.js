@@ -44,27 +44,20 @@ delay();
 // Напишите функцию которая принимает число и и через каждые 3 секунды 2 раза возводит число в квадрат
 // и выводит промежуточные и конечный результат в консоль.
 function squarePow(num) {
-  let promise = new Promise((resolve, reject) => {
-    setTimeout(() => {
-      if (typeof num != "number") {
-        reject(num);
-        return;
-      }
-      resolve(num);
-    }, 3000);
-  });
+  let promise = () =>
+    new Promise((resolve, reject) => {
+      if (typeof num !== "number") reject(`Error, ${num} is not a number`);
+      setTimeout(() => {
+        resolve((num *= num));
+      }, 3000);
+    });
 
-  promise
-    .then(num => {
-      num *= num;
-      console.log(num);
-      return num;
+  return promise()
+    .then(res => {
+      console.log(res);
+      return promise();
     })
-    .then(num => {
-      num *= num;
-      console.log(num);
-      squarePow(num);
-    })
+    .then(res => console.log(res))
     .catch(() => {
       console.log(`Error: ${num} is not a number`);
     });

@@ -1,42 +1,38 @@
 class Fetch {
   static get({ url, routes }) {
-    let arr = [];
-
-    this.myFetch(`${url}${routes}`).then(data => {
-      data.forEach(elem => {
-        arr.push(elem);
-      });
+    return this.myFetch(`${url}${routes}`).then(data => {
+      console.log(data.json());
+      return data;
     });
-    return arr;
   }
 
   static post({ url, product }) {
     this.myFetch(`${url}`, {
       method: "POST",
       body: JSON.stringify(product)
-    });
+    }).catch(err => console.log(err));
   }
 
   static put({ url, product }) {
     this.myFetch(`${url}/${product.id}`, {
       method: "PUT",
       body: JSON.stringify(product)
-    });
+    }).catch(err => console.log(err));
   }
 
   static delete({ url, product }) {
     this.myFetch(`${url}/${product.id}`, {
       method: "DELETE",
       body: JSON.stringify(product)
-    });
+    }).catch(err => console.log(err));
   }
 
-  static myFetch(options) {
-    return fetch(options).then(response => {
+  static myFetch(url, options = null) {
+    return fetch(url, options).then(response => {
       if (response.status >= 400) {
         throw new Error("Error", response.tatus);
       }
-      return response.json();
+      return response;
     });
   }
 }
@@ -75,6 +71,6 @@ const testPutFetch = {
   }
 };
 
-Fetch.post(testPutFetch).catch(err => console.log(err));
+Fetch.post(testPutFetch);
 
-Fetch.delete(testPutFetch).catch(err => console.log(err));
+Fetch.delete(testPutFetch);

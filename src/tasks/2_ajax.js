@@ -4,9 +4,10 @@ const URL = "https://my-json-server.typicode.com/tkachenko-tatiana/shop-api";
 function getProducts() {
   fetch(`${URL}/products`)
     .then(response => {
-      response.json().then(products => {
-        console.log(products);
-      });
+      return response.json();
+    })
+    .then(products => {
+      console.log(products);
     })
     .catch(err => console.log(err));
 }
@@ -17,9 +18,10 @@ getProducts();
 function getProductById(id) {
   fetch(`${URL}/products/${id}`)
     .then(response => {
-      response.json().then(product => {
-        console.log(product);
-      });
+      return response.json();
+    })
+    .then(product => {
+      console.log(product);
     })
     .catch(err => console.log(err));
 }
@@ -68,13 +70,11 @@ function getProductsList(page) {
 }
 
 async function showProducts() {
-  let question = confirm("Show more ?");
   let page = 1;
-  while (question) {
+  do {
     await getProductsList(page);
     page++;
-    question = confirm("Show more ?");
-  }
+  } while (confirm("Show more ?"));
 }
 
 showProducts();
